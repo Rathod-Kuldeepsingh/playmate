@@ -4,6 +4,8 @@ import 'package:playmate/Colors/Colors.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Forget.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Login.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Registration.dart';
+import 'package:playmate/Presentation/Games/Calendar/Past-Screen.dart';
+import 'package:playmate/Presentation/Games/Calendar/Upcoming-Screen.dart';
 import 'package:playmate/Presentation/Onboarding-Screen/Onboardig.dart';
 
 class menu extends StatefulWidget {
@@ -14,15 +16,26 @@ class menu extends StatefulWidget {
 }
 
 class _menuState extends State<menu> with SingleTickerProviderStateMixin {
-  bool isUpcoming = true;
+
   late TabController _tabController;
 
   final List<String> tabs = ["Upcoming", "Past"];
 
-  final List<Widget> screens = [
-    Onboarding(),
-    Login(),
+  final List<String> popmenu = [
+    "Create Games",
+    "Invite Player",
+    "Share My Calendar",
+    "My Booking",
   ];
+
+  final List<IconData> popicon = [
+    Icons.add_circle_outline,
+    Icons.person_add_alt,
+    Icons.share,
+    Icons.calendar_month,
+  ];
+
+  final List<Widget> screens = [Upcomingscreen(), PastScreen()];
 
   @override
   void initState() {
@@ -47,10 +60,10 @@ class _menuState extends State<menu> with SingleTickerProviderStateMixin {
         automaticallyImplyLeading: false,
         toolbarHeight: 0,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(55),
+          preferredSize: const Size.fromHeight(65),
           child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
                 TabBar(
                   controller: _tabController,
@@ -64,7 +77,6 @@ class _menuState extends State<menu> with SingleTickerProviderStateMixin {
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.black,
                   labelPadding: const EdgeInsets.symmetric(horizontal: 1),
-
                   tabs: List.generate(
                     tabs.length,
                     (index) => Padding(
@@ -75,9 +87,53 @@ class _menuState extends State<menu> with SingleTickerProviderStateMixin {
                       child: Text(
                         tabs[index],
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                PopupMenuButton<int>(
+                  color: AppColors.background,
+                  icon: const Icon(Icons.more_vert, color: Colors.black),
+                  onSelected: (val) {
+                    final selectedItem = popmenu[val];
+                    debugPrint("Selected: $selectedItem");
+                    switch (val) {
+                      case 0:
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const Onboarding()),
+                        );
+                        break;
+                      case 1:
+                        // Invite Player
+                        break;
+                      case 2:
+                        // Share My Calendar
+                        break;
+                      case 3:
+                        // My Booking
+                        break;
+                    }
+                  },
+
+                  itemBuilder: (context) => List.generate(
+                    popmenu.length,
+                    (index) => PopupMenuItem<int>(
+                      value: index,
+                      child: Row(
+                        children: [
+                          Icon(
+                            popicon[index], 
+                            size: 18,
+                            color: AppColors.darkGreen,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(popmenu[index]),
+                        ],
                       ),
                     ),
                   ),
@@ -89,9 +145,10 @@ class _menuState extends State<menu> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _tabController,
-        physics: const BouncingScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         children: screens,
       ),
     );
   }
 }
+

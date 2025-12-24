@@ -4,6 +4,7 @@ import 'package:playmate/Colors/Colors.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Forget.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Login.dart';
 import 'package:playmate/Presentation/Authentication-Screen/Registration.dart';
+import 'package:playmate/Presentation/Games/Recommended/Games-Menu.dart';
 import 'package:playmate/Presentation/Games/menu.dart';
 import 'package:playmate/Presentation/Onboarding-Screen/Onboardig.dart';
 
@@ -28,7 +29,7 @@ class _SimpleTabViewState extends State<SimpleTabView>
 
   final List<Widget> screens = [
     menu(),
-    Login(),
+    Gamesmenu(),
     Registration(),
     Forget(),
   ];

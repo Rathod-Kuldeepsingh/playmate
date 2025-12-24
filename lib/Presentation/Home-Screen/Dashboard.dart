@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:playmate/Colors/Colors.dart';
 import 'package:playmate/Presentation/Games/game.dart';
 import 'package:playmate/Presentation/Home-Screen/Profile.dart';
+import 'package:playmate/Presentation/Notification/alert.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -18,8 +19,6 @@ class _DashboardState extends State<Dashboard> {
     Center(child: Text("Dashboard", style: TextStyle(fontSize: 22))),
     SimpleTabView(),
     Center(child: Text("Community", style: TextStyle(fontSize: 22))),
-    Center(child: Text("Service", style: TextStyle(fontSize: 22))),
-    Center(child: Text("Society", style: TextStyle(fontSize: 22))),
   ];
 
   void _onTap(int index) {
@@ -62,7 +61,12 @@ class _DashboardState extends State<Dashboard> {
             icon: const Icon(Icons.notifications_none),
             iconSize: 28,
              color: AppColors.textDark,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Alert()),
+              );
+            },
           ),
 
           const SizedBox(width: 10),
@@ -138,11 +142,6 @@ class _DashboardState extends State<Dashboard> {
                icon: Icon(Icons.calendar_month_outlined),
               activeIcon: Icon(Icons.calendar_month),
               label: "Booking",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_outlined),
-              activeIcon:Icon(Icons.person_2),
-              label: "Profile",
             ),
           ],
         ),)
