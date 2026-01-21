@@ -32,16 +32,17 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
        backgroundColor: AppColors.background,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
         title: Text(
-          "Dashboard",
+          "PlayMate",
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
               color: Colors.black,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

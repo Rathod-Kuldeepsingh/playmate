@@ -20,13 +20,73 @@ class _SportslistState extends State<Sportslist> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return _sportsCard();
-        },
+      body: Column(
+        children: [
+          SizedBox(height: 100),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 100,
+                  child: ElevatedButton(
+                    // style: ElevatedButton.styleFrom(
+                    //   shape: 
+                    // ),
+                    onPressed: () {},
+                    child: Row(children: [Icon(Icons.filter)]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(12),
+              itemCount: 2,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return _sportsCard();
+              },
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  void showMyBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Choose Option",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              ListTile(
+                leading: Icon(Icons.camera),
+                title: Text("Camera"),
+                onTap: () => Navigator.pop(context),
+              ),
+              ListTile(
+                leading: Icon(Icons.photo),
+                title: Text("Gallery"),
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -44,13 +104,12 @@ class _SportslistState extends State<Sportslist> {
             color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-       
           /// 🔹 Top Row
           Row(
             children: [
@@ -65,10 +124,7 @@ class _SportslistState extends State<Sportslist> {
           /// 🔹 Players + Price
           Row(
             children: [
-              const CircleAvatar(
-                radius: 22,
-                child: Text("C"),
-              ),
+              const CircleAvatar(radius: 22, child: Text("C")),
               const SizedBox(width: 10),
               Text(
                 "$joinedPlayers / $maxPlayers Joined",
@@ -110,8 +166,11 @@ class _SportslistState extends State<Sportslist> {
           /// 🔹 Location
           Row(
             children: [
-              Icon(Icons.location_on_outlined,
-                  size: 18, color: Colors.grey.shade700),
+              Icon(
+                Icons.location_on_outlined,
+                size: 18,
+                color: Colors.grey.shade700,
+              ),
               const SizedBox(width: 4),
               Text(
                 "Ahmedabad",
@@ -121,8 +180,7 @@ class _SportslistState extends State<Sportslist> {
                 ),
               ),
               const Spacer(),
-              Icon(Icons.arrow_forward_ios,
-                  size: 14, color: Colors.grey),
+              Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
             ],
           ),
         ],
@@ -140,10 +198,7 @@ class _SportslistState extends State<Sportslist> {
       ),
       child: Text(
         text,
-        style: GoogleFonts.poppins(
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-        ),
+        style: GoogleFonts.poppins(fontSize: 11, fontWeight: FontWeight.w500),
       ),
     );
   }

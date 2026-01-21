@@ -47,7 +47,7 @@ class Onboarding extends StatelessWidget {
                     ),
                   ],
                 ),
-          
+               SizedBox(height: 80,),
                 // Bottom section
                 Column(
                   children: [

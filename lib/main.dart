@@ -21,11 +21,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
     
-      home: Dashboard(),
+      home: Sportslist(),
       routes: {
         '/login': (context) => Login(),
         '/registration': (context) => Registration(),
-        '/forget' : (context) => Forget()
+        '/forget' : (context) => Forget(),
+        '/dash':(context)=> Dashboard()
       },
     );
   }
